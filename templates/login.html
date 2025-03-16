@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MemeVault</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4A1D96 0%, #4338CA 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #FF6B6B);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: white;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #FFD700;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2rem;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #FFD700;
+        }
+
+        .forgot-password {
+            color: #FFD700;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            opacity: 0.8;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(45deg, #FFD700, #FF6B6B);
+            border: none;
+            border-radius: 25px;
+            color: black;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .auth-links {
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .auth-links a {
+            color: #FFD700;
+            text-decoration: none;
+            margin-left: 5px;
+            transition: opacity 0.3s ease;
+        }
+
+        .auth-links a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="logo">😂 MemeVault</div>
+        <h1>Welcome Back!</h1>
+        {% if error %}
+            <p style="color: white;">{{ error }}</p>
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Username</label>
+                <div class="input-group">
+                    <span class="input-icon">✉️</span>
+                    <input type="text" id="Username" name="username" placeholder="Username" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+            </div>
+            <div class="remember-forgot">
+                <label class="remember-me">
+                    <input type="checkbox">
+                    Remember me
+                </label>
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </div>
+            <button type="submit" class="submit-btn">Sign In</button>
+        </form>
+        <div class="auth-links">
+            Don't have an account?<a href={% url 'Signup' %}>Sign up</a>
+            
+        </div>
+    </div>
+</body>
+</html>

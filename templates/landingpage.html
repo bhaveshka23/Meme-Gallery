@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemeVault - Ultimate Meme Gallery</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #2a0845 0%, #6441A5 100%);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Utility classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #FFD700, #FF6B6B);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Header styles */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #FFD700, #FF6B6B);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hero section */
+        .hero {
+            padding-top: 120px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .meme-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .meme-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .meme-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .meme-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Features section */
+        .features {
+            padding: 100px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .meme-grid {
+                grid-template-columns: 1fr;
+            }
+            /* Modal Background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+    color: black;
+    position: relative;
+}
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Input Fields */
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                😂 MemeVault
+            </div>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#trending">Trending</a>
+                <a href="#upload">Upload</a>
+                <button onclick='window.location.href="/Signup"' class="btn btn-primary">Sign In</button>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Your Ultimate Meme Gallery</h1>
+                    <p>Discover, share, and create the internet's best memes. Join our community of meme enthusiasts and let the fun begin!</p>
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
+                <div class="meme-grid">
+                    <div class="meme-card">
+                        <img src="https://images.unsplash.com/photo-1531928351158-2f736078e0a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Meme">
+                    </div>
+                    <div class="meme-card">
+                        <img src="https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Meme">
+                    </div>
+                    <div class="meme-card">
+                        <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Meme">
+                    </div>
+                    <div class="meme-card">
+                        <img src="https://images.unsplash.com/photo-1520808663317-647b476a81b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Meme">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Trending Memes</h3>
+                    <p>Stay updated with the latest and most viral memes from around the world.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Easy Sharing</h3>
+                    <p>Share your favorite memes instantly across all social platforms.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Meme Creator</h3>
+                    <p>Create your own memes with our easy-to-use meme generator tool.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

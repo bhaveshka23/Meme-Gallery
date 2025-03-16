@@ -1,0 +1,19 @@
+{% extends 'home.html' %}
+{% block content %}
+
+<div class="modal-content">
+    <h2>Add a New Meme</h2>
+    <form method="POST" action="{% url 'update_meme' meme.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Meme Title:</label>
+        <input type="text" name="title" required>
+
+        <label>Upload Meme:</label>
+        <input type="file" name="image" required>
+
+        <div class="modal-buttons">
+            <button type="submit" class="submit-btn">Add Meme</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
