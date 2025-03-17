@@ -57,8 +57,8 @@ def Signup(request):
 
 @login_required(login_url='login')
 def home(request):
-    memes = Meme.objects.all().order_by('-id')  
-    return render(request, 'home.html', {'memes': memes,'Title':'Meme by Bhavesh Kale'})
+    memes = Meme.objects.filter(user=request.user)  
+    return render(request, 'home.html', {'memes': memes})
     
 @login_required(login_url='login')
 def delete_meme(request,memeid):
@@ -72,7 +72,7 @@ def add_meme(request):
         title = request.POST.get('title')
         image = request.FILES.get('image')
 
-        Meme.objects.create(title=title, image=image)
+        Meme.objects.create(title=title, image=image,user=request.user)
 
         return redirect('home')   
     return redirect('home.html')

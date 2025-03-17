@@ -1,52 +1,120 @@
-{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>Meme Gallery</title>
         <style>
-            /* General Styles */
-            body {
-                font-family: Arial, sans-serif;
+            /* Modern CSS Reset and Variables */
+            :root {
+                --primary: #FF3366;
+                --secondary: #6C63FF;
+                --dark: #2A2A2A;
+                --light: #FFFFFF;
+                --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            }
+
+            * {
                 margin: 0;
                 padding: 0;
-                background-color: #f8f9fa;
-                text-align: center;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', system-ui, sans-serif;
+                
             }
 
-            /* Header */
+            body {
+                background: #f0f2f5;
+                min-height: 100vh;
+                background: linear-gradient(135deg, #4A1D96 0%, #4338CA 100%);
+            }
+
+            /* Animated Header */
             .header {
-                background-color: #ffc107; /* Yellow */
-                height: 80px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+                background: var(--gradient);
+                padding: 1.5rem;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             }
+
+            .header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+                animation: moveBackground 20s linear infinite;
+            }
+
+            @keyframes moveBackground {
+                0% { background-position: 0 0; }
+                100% { background-position: 100px 100px; }
+            }
+
             .header h1 {
-                color: white;
-                font-size: 30px;
-                font-weight: bold;
-                margin: 0;
-                padding: 10px;
+                color: var(--light);
+                font-size: 2.5rem;
+                font-weight: 800;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+                position: relative;
+                z-index: 1;
             }
 
-            /* Button */
+            .header a {
+                
+                position: absolute;
+                right: 2rem;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--light);
+                text-decoration: none;
+                padding: 0.8rem 1.5rem;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 30px;
+                backdrop-filter: blur(5px);
+                transition: all 0.3s ease;
+                z-index: 1;
+            }
+
+            .header a:hover {
+                background: rgba(255, 255, 255, 0.3);
+                transform: translateY(-50%) scale(1.05);
+            }
+
+            /* Add Meme Section */
+            .text-center {
+                
+                text-align: center;
+                padding: 3rem 0;
+            }
+
+            .text-center h1 {
+                
+                color:white;
+                margin-bottom: 1.5rem;
+                font-size: 2rem;
+                font-weight: 700;
+            }
+
             .btn {
-                background-color: #007bff; /* Blue */
-                color: white;
-                font-size: 18px;
-                font-weight: bold;
-                padding: 10px 20px;
+                background: var(--gradient);
+                color: var(--light);
+                padding: 1rem 2rem;
                 border: none;
-                border-radius: 5px;
+                border-radius: 30px;
+                font-size: 1.1rem;
+                font-weight: 600;
                 cursor: pointer;
-                transition: 0.3s;
-            }
-            .btn:hover {
-                background-color: #0056b3;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             }
 
-            /* Modal */
+            .btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            }
+
+            /* Modal Styling */
             .modal {
                 display: none;
                 position: fixed;
@@ -54,46 +122,79 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(5px);
+                z-index: 1000;
                 justify-content: center;
                 align-items: center;
             }
+
             .modal-content {
-                background: white;
-                padding: 20px;
-                border-radius: 10px;
-                width: 350px;
-                text-align: left;
-            }
-            .modal-content h2 {
-                margin-bottom: 10px;
-            }
-            .modal-content input {
-                width: 100%;
-                padding: 8px;
-                margin-bottom: 10px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-            .modal-buttons {
-                display: flex;
-                justify-content: flex-end;
-            }
-            .modal-buttons button {
-                padding: 8px 15px;
-                border: none;
-                color: white;
-                cursor: pointer;
-                border-radius: 5px;
-                margin-left: 10px;
-            }
-            .cancel-btn {
-                background-color: #6c757d;
-            }
-            .submit-btn {
-                background-color: #007bff;
+                background: var(--light);
+                padding: 2rem;
+                border-radius: 20px;
+                width: 400px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+                transform: scale(0.9);
+                animation: modalPop 0.3s ease forwards;
             }
 
+            @keyframes modalPop {
+                to { transform: scale(1); }
+            }
+
+            .modal-content h2 {
+                color: var(--dark);
+                margin-bottom: 1.5rem;
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+
+            .modal-content input {
+                width: 100%;
+                padding: 0.8rem;
+                margin-bottom: 1rem;
+                border: 2px solid #eee;
+                border-radius: 10px;
+                transition: all 0.3s ease;
+            }
+
+            .modal-content input:focus {
+                border-color: var(--secondary);
+                outline: none;
+            }
+
+            .modal-buttons {
+                display: flex;
+                gap: 1rem;
+                justify-content: flex-end;
+                margin-top: 1.5rem;
+            }
+
+            .modal-buttons button {
+                padding: 0.8rem 1.5rem;
+                border: none;
+                border-radius: 10px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .cancel-btn {
+                background: #f0f0f0;
+                color: var(--dark);
+            }
+
+            .submit-btn {
+                background: var(--gradient);
+                color: var(--light);
+            }
+
+            .modal-buttons button:hover {
+                transform: translateY(-2px);
+            }
+
+            /* Meme Grid */
             /* Meme Container */
             .meme-container {
                 margin: 20px auto;
@@ -103,7 +204,7 @@
                 gap: 20px;
             }
             .meme-box {
-                background-color: #007bff;
+                background: var(--gradient);
                 color: white;
                 padding: 20px;
                 border-radius: 10px;
@@ -119,48 +220,57 @@
             .meme-box h1 {
                 font-size: 24px;
                 margin-top: 10px;
-            }
-            button{
-                background-color:green;
-                padding:10px;
-                color:white;
-                border-radius:10px;
-                border:2px solid green;
-                cursor:pointer;
+                margin-bottom:25px;
             }
             
-            .delete-btn{
-                
-                text-decoration:none;
-                color:white;
-                border:2px solid red;
-                padding:8px;
-                background-color:red;
-                border-radius:10px;
+            .delete-btn, .update-btn {
+                flex: 1;
+                text-decoration: none;
+                padding: 0.8rem;
+                border-radius: 10px;
+                text-align: center;
+                font-weight: 600;
+                transition: all 0.3s ease;
             }
-            .update-btn{
-                
-                text-decoration:none;
-                color:white;
-                border:2px solid green;
-                padding:8px;
-                background-color:green;
-                border-radius:10px;
+
+            .delete-btn {
+                background: #FF3B3B;
+                color: var(--light);
             }
-            
+
+            .update-btn {
+                background: #00C853;
+                color: var(--light);
+            }
+
+            .delete-btn:hover, .update-btn:hover {
+                transform: translateY(-2px);
+                filter: brightness(1.1);
+            }
+
+            /* Responsive Design */
+            @media (max-width: 768px) {
+                .header h1 {
+                    font-size: 2rem;
+                }
+
+                .modal-content {
+                    width: 90%;
+                    margin: 0 1rem;
+                }
+            }
         </style>
     </head>
     <body>
-
         <!-- Header -->
         <div class="header">
-            <h1>{{ Title  }}</h1>
-            <a href={% url 'Logout_view' %}>Logout</a>
+            <h1>Welcome to the Meme Gallery</h1>
+            <a href="{% url 'Logout_view' %}">Logout</a>
         </div>
 
         <!-- Add Meme Button -->
-        <div class="text-center mt-10">
-            <h1 style="font-size: 30px; margin-bottom: 10px;">Click below to Add the Meme</h1>
+        <div class="text-center">
+            <h1>Click below to Add the Meme</h1>
             <button onclick="OpenModel()" class="btn">Add Meme</button>
         </div>
 
@@ -188,16 +298,17 @@
         <div class="meme-container">
             {% for meme in memes %}
             <div class="meme-box" id="meme-{{ meme.id }}">
-                <img src="{{ meme.image.url }}" alt="">
+                <img src="{{ meme.image.url }}" alt="{{ meme.title }}">
                 <h1>{{ meme.title }}</h1>
-                <a class="delete-btn" href="{% url 'delete_meme' meme.id %}">Delete</a>
-                <a class="update-btn" href="{% url 'update_meme' meme.id %}">update</a>
+                <div class="meme-actions">
+                    <a class="delete-btn" href="{% url 'delete_meme' meme.id %}">Delete</a>
+                    <a class="update-btn" href="{% url 'update_meme' meme.id %}">Update</a>
+                </div>
             </div>
             {% endfor %}
         </div>
-        
-        {% block content %}
 
+        {% block content %}
         {% endblock %}
 
         <!-- JavaScript -->
@@ -209,7 +320,12 @@
                 document.getElementById('memeModal').style.display = "none";
             }
 
+            // Close modal when clicking outside
+            document.getElementById('memeModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModel();
+                }
+            });
         </script>
-
     </body>
 </html>

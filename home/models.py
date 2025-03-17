@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Meme(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
     title=models.CharField(max_length=100)
     image=models.ImageField(upload_to='uploads',height_field='image_height',width_field='image_width',)
     image_height = models.PositiveIntegerField(default=200)
